@@ -1,3 +1,9 @@
+/*
+ * Very simple buoyancy simulation
+ * This script gets added to your water object 
+ * Water has to have a collider which is set to TRIGGER
+ * Also added water drag
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
