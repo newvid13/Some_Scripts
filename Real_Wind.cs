@@ -1,5 +1,5 @@
 /*
- * Simulates wind force on rigidbodies in windRadius
+ * Simulates wind force on leaves in windRadius
  * Moves randomly around the level
  * Wrote this during a game jam so it needs some work
 */
