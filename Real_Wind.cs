@@ -29,10 +29,12 @@ public class RealWind : MonoBehaviour
     void Start()
     {
         myAudio = GetComponent<AudioSource>();
+        
         InvokeRepeating("CheckRadius", 0.1f, 0.1f);
-        StartCoroutine(waitFirst());
+        StartCoroutine(waitMove());
     }
-
+    
+    //gets called 10 times a second
     private void CheckRadius()
     {
         if (isOff)
@@ -56,6 +58,7 @@ public class RealWind : MonoBehaviour
         }
     }
 
+    //moves the wind object around the level
     IEnumerator waitMove()
     {
         time = Random.Range(minWait, maxWait);
@@ -85,22 +88,8 @@ public class RealWind : MonoBehaviour
         isOff = true;
         StartCoroutine(waitMove());
     }
-
-    IEnumerator waitFirst()
-    {
-        yield return new WaitForSeconds(2f);
-
-        dist = 2.3f;
-        time = 2f;
-        newPos = transform.position + transform.forward * dist;
-        transform.DOMove(newPos, time).SetEase(Ease.InCubic);
-        isOff = false;
-
-        yield return new WaitForSeconds(time);
-        isOff = true;
-        StartCoroutine(waitMove());
-    }
-
+    
+    //plays sound depending on how many leaves are within radius 
     IEnumerator waitAudio(int amount)
     {
         float vol = 0.6f;
