@@ -1,5 +1,5 @@
 /*
- * Very simple buoyancy simulation
+ * Simple buoyancy simulation
  * This script gets added to your water object 
  * Water has to have a collider which is set to TRIGGER
  * Also added water drag
@@ -10,15 +10,19 @@ using UnityEngine;
 
 public class Water_Buoyancy : MonoBehaviour
 {
-    [SerializeField] private float waterDensity = 1f, waterDrag = 1f;
-    [SerializeField] private Transform waterLine;
+    [SerializeField] float waterDensity = 1f, waterDrag = 0.1f;
 
-    private Rigidbody rig;
-    private Object_Rigid scrObj;
-    private Vector3[] vertices;
-    private Vector3 verticesWorld, newVel;
-    private Mesh mesh;
-    private float vertexWeight, submergedVolume;
+    Rigidbody rig;
+    Object_Rigid scrObj;
+    Vector3[] vertices;
+    Vector3 verticesWorld, newVel;
+    Mesh mesh;
+    float vertexWeight, submergedVolume, waterSurfaceLine;
+
+    private void Start()
+    {
+        waterSurfaceLine = transform.position.y + (transform.localScale.y / 2f);
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -44,12 +48,12 @@ public class Water_Buoyancy : MonoBehaviour
         {
             verticesWorld = obj.transform.TransformPoint(vertices[i]);
 
-            if (verticesWorld.y < waterLine.position.y)
+            if (verticesWorld.y < waterSurfaceLine)
                 submergedVolume += vertexWeight;
         }
 
         //Add buoyancy force
-        rig.AddForce(Vector3.up * waterDensity * scrObj.objFg * scrObj.objFloatiness * submergedVolume, ForceMode.Force);
+        rig.AddForce(Vector3.up * waterDensity * scrObj.objFg * submergedVolume, ForceMode.Force);
 
         //Apply drag
         newVel = rig.velocity;
