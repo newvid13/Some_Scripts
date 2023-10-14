@@ -38,16 +38,7 @@ public class TerrainGenerate : MonoBehaviour
                 xCoord = (float)i / xRes * perlinScale;
                 yCoord = (float)j / yRes * perlinScale;
                 float num = Mathf.PerlinNoise(xCoord, yCoord);
-                
-                //adds heights around the edges as a barrier
-                if (i < 20 || i > xRes - 20 || j < 20 || j > yRes - 20)
-                {
-                    Heights[i, j] = 0.1f + num * 0.8f;
-                }
-                else
-                {
-                    Heights[i, j] = 0.1f + num * terrainScale;
-                }
+                Heights[i, j] = 0.1f + num * terrainScale;
             }
         }
         
