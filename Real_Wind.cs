@@ -10,21 +10,21 @@ using DG.Tweening;
 
 public class RealWind : MonoBehaviour
 {
-    public LayerMask rigidMask;
+    [SerializeField] LayerMask rigidMask, colMask;
+    [SerializeField] float windForce, windRadius;
+    
     private Collider[] Cols;
-    [SerializeField] private float windForce, windRadius;
     private bool isOff = true, audioReady = true;
     private Rigidbody leafRig;
     private Vector3 windDirection;
 
-    public LayerMask colMask;
     private Vector3 rot, newPos;
     private Quaternion newRot = Quaternion.identity;
     private float time, dist;
-    public float minWait, maxWait;
+    [SerializeField] float minWait, maxWait;
 
-    private AudioSource myAudio;
-    public AudioClip[] windClips;
+    AudioSource myAudio;
+    [SerializeField] AudioClip[] windClips;
 
     void Start()
     {
