@@ -9,8 +9,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Object_Rigid : MonoBehaviour
 {
-    private Rigidbody myRig;
-    public float objVolume, objFg, objFloatiness;
+    Rigidbody myRig;
+    public float objVolume, objFg;
 
     void Start()
     {
