@@ -7,7 +7,7 @@ public struct pg
     public int[,] grid;
 }
 
-public class TetBeh : MonoBehaviour
+public class OneScriptTetris : MonoBehaviour
 {
     [SerializeField] GameObject[] prefabPieces;
     pg[] prefabGridPieces;
